@@ -1,6 +1,15 @@
 {
-  "dependencies": {
-    "global": "^4.4.0",
-    "live-server": "^1.2.1"
+  "name": "brewdog-punk-react-app",
+  "version": "1.0.0",
+  "description": "React application uses Punk API to pull data from BrewDog's beer server",
+  "main": "index.js",
+  "repository": "git@github.com:dinesh-se/brewdog-punk-react-app.git",
+  "author": "Dinesh Haribabu <dinesh.be.gct@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
   }
 }
