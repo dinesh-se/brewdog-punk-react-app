@@ -1,1 +1,1 @@
-# BrewDOG beer application
+# BrewDog's beer application
