@@ -58,8 +58,108 @@ var SubTitle = function SubTitle(props) {
 //   }
 // }
 
-var Search = function (_React$Component2) {
-  _inherits(Search, _React$Component2);
+var BeerBanner = function (_React$Component2) {
+  _inherits(BeerBanner, _React$Component2);
+
+  function BeerBanner(props) {
+    _classCallCheck(this, BeerBanner);
+
+    var _this2 = _possibleConstructorReturn(this, (BeerBanner.__proto__ || Object.getPrototypeOf(BeerBanner)).call(this, props));
+
+    _this2.state = {
+      error: null,
+      isLoaded: false,
+      beerInfo: ''
+    };
+    _this2.getAnotherBeer = _this2.getAnotherBeer.bind(_this2);
+    return _this2;
+  }
+
+  _createClass(BeerBanner, [{
+    key: "fetchRandomBeer",
+    value: function fetchRandomBeer() {
+      return fetch("https://api.punkapi.com/v2/beers/random").then(function (res) {
+        return res.json();
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getAnotherBeer();
+    }
+  }, {
+    key: "getAnotherBeer",
+    value: function getAnotherBeer() {
+      var _this3 = this;
+
+      this.fetchRandomBeer().then(function (response) {
+        _this3.setState(function () {
+          return {
+            isLoaded: true,
+            beerInfo: response[0]
+          };
+        });
+        console.log(_this3.state);
+      }, function (error) {
+        _this3.setState(function () {
+          return {
+            isLoaded: true,
+            error: error
+          };
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _state = this.state,
+          error = _state.error,
+          isLoaded = _state.isLoaded,
+          beerInfo = _state.beerInfo;
+
+      if (error) {
+        return React.createElement(
+          "div",
+          null,
+          "Error: ",
+          error.message
+        );
+      } else if (!isLoaded) {
+        return React.createElement(
+          "div",
+          null,
+          "Loading..."
+        );
+      } else {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement("img", { src: beerInfo.image_url }),
+          React.createElement(
+            "h3",
+            null,
+            beerInfo.name
+          ),
+          React.createElement(
+            "p",
+            null,
+            beerInfo.description
+          ),
+          React.createElement(
+            "button",
+            { onClick: this.getAnotherBeer },
+            "Another Beer"
+          )
+        );
+      }
+    }
+  }]);
+
+  return BeerBanner;
+}(React.Component);
+
+var Search = function (_React$Component3) {
+  _inherits(Search, _React$Component3);
 
   function Search() {
     _classCallCheck(this, Search);
@@ -81,28 +181,60 @@ var Search = function (_React$Component2) {
   return Search;
 }(React.Component);
 
-var SearchForm = function (_React$Component3) {
-  _inherits(SearchForm, _React$Component3);
+var SearchForm = function (_React$Component4) {
+  _inherits(SearchForm, _React$Component4);
 
   function SearchForm(props) {
     _classCallCheck(this, SearchForm);
 
-    var _this3 = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
+    var _this5 = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
 
-    _this3.searchBeer = _this3.searchBeer.bind(_this3);
-    return _this3;
+    _this5.state = {
+      beerList: [],
+      isLoaded: false,
+      error: null
+    };
+    _this5.searchBeer = _this5.searchBeer.bind(_this5);
+    return _this5;
   }
 
   _createClass(SearchForm, [{
     key: "searchBeer",
     value: function searchBeer(e) {
+      var _this6 = this;
+
       e.preventDefault();
-      console.log("this object", this);
-      console.log(e.target.elements);
       var stringValue = e.target.elements.search_input.value;
       var searchBy = e.target.elements.search.value;
-      console.log(stringValue, searchBy);
-      e.target.elements.search_input.value = '';
+      this.fetchBeer(searchBy, stringValue).then(function (response) {
+        _this6.setState(function () {
+          return {
+            beerList: response,
+            isLoaded: true
+          };
+        });
+        console.log('beer list', _this6.state);
+      }, function (error) {
+        _this6.setState(function () {
+          return {
+            error: error,
+            isLoaded: true
+          };
+        });
+      });
+    }
+  }, {
+    key: "fetchBeer",
+    value: function fetchBeer(type, value) {
+      var formattedValue = this.spaceToUnderscore(value);
+      return fetch("https://api.punkapi.com/v2/beers?" + type + "=" + formattedValue).then(function (res) {
+        return res.json();
+      });
+    }
+  }, {
+    key: "spaceToUnderscore",
+    value: function spaceToUnderscore(string) {
+      return string.replace(/ /g, '_');
     }
   }, {
     key: "render",
@@ -143,7 +275,8 @@ var SearchForm = function (_React$Component3) {
             { type: "submit", className: "search" },
             "Search"
           )
-        )
+        ),
+        React.createElement(SearchResults, { beerList: this.state.beerList })
       );
     }
   }]);
@@ -151,27 +284,37 @@ var SearchForm = function (_React$Component3) {
   return SearchForm;
 }(React.Component);
 
-var SearchButton = function (_React$Component4) {
-  _inherits(SearchButton, _React$Component4);
+var SearchResults = function (_React$Component5) {
+  _inherits(SearchResults, _React$Component5);
 
-  function SearchButton() {
-    _classCallCheck(this, SearchButton);
+  function SearchResults() {
+    _classCallCheck(this, SearchResults);
 
-    return _possibleConstructorReturn(this, (SearchButton.__proto__ || Object.getPrototypeOf(SearchButton)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).apply(this, arguments));
   }
 
-  _createClass(SearchButton, [{
+  _createClass(SearchResults, [{
     key: "render",
     value: function render() {
       return React.createElement(
-        "button",
-        { type: "submit", className: "search", onClick: this.searchBeer },
-        "Search"
+        "div",
+        null,
+        React.createElement(
+          "ul",
+          null,
+          this.props.beerList.map(function (beer) {
+            return React.createElement(
+              "li",
+              { key: beer.id },
+              beer.name
+            );
+          })
+        )
       );
     }
   }]);
 
-  return SearchButton;
+  return SearchResults;
 }(React.Component);
 
 // class Counter extends React.Component {
@@ -218,6 +361,7 @@ var jsx = React.createElement(
   "div",
   null,
   React.createElement(Header, { title: appInfo.name, subtitle: appInfo.subtitle }),
+  React.createElement(BeerBanner, null),
   React.createElement(Search, null)
 );
 
