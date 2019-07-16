@@ -1,0 +1,9 @@
+$container-bg-color: #eeeeee;
+
+.container {
+  min-width: 1080px;
+  width: 80%;
+  min-height: 600px;
+  background-color: $container-bg-color;
+  margin: auto;
+}
