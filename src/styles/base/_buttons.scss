@@ -1,0 +1,13 @@
+$primary-button-bg: #44b0db;
+
+.button {
+  height: 5rem;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.primary-btn {
+  background-color: $primary-button-bg;
+}

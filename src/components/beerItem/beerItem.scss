@@ -1,0 +1,22 @@
+.beer-information {
+  flex: 14;
+}
+
+.beer-item {
+  height: 7rem;
+}
+
+.beer-item-name {
+  margin: 0;
+  padding: 0 1.6rem;
+}
+
+.beer-item-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px; /* fallback */
+  padding: 0 1.6rem;
+}

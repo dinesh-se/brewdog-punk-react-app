@@ -1,9 +1,13 @@
-$container-bg-color: #eeeeee;
+$container-bg-color: #FFFFFF;
 
 .container {
-  min-width: 1080px;
   width: 80%;
-  min-height: 600px;
   background-color: $container-bg-color;
   margin: auto;
+  padding: 1.6rem;
+}
+
+.footer-section {
+  text-align: center;
+  padding: 3.2rem 0;
 }

@@ -1,4 +1,5 @@
-@import './base/_base.scss';
+@import './base/_base';
+@import './base/buttons';
 
 body {
   background-color: $app-background;

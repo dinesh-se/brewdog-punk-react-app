@@ -1,13 +1,12 @@
 import React from 'react';
 import Header from '../header/Header';
-import BeerBanner from '../BeerBanner';
-import SearchForm from '../SearchForm';
+import BeerBanner from '../beerBanner/beerBanner';
+import SearchForm from '../searchForm/searchForm';
 import './beerDogApp.scss';
 
 
 const appInfo = {
-  name: "BrewDog's Beer Application",
-  subtitle: "Your beer helper"
+  name: "BrewDog"
 };
 
 export default class BeerDog extends React.Component {
@@ -15,10 +14,13 @@ export default class BeerDog extends React.Component {
     return (
       <div>
         <Header title={appInfo.name} subtitle={appInfo.subtitle} />
-        <div className="container">
+        <section className="container">
           <BeerBanner />
           <SearchForm />
-        </div>
+        </section>
+        <footer className="footer-section">
+          <small>Developed by Dinesh Haribabu</small>
+        </footer>
       </div>
     )
   }

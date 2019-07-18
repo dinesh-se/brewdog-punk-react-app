@@ -1,0 +1,31 @@
+.search-container {
+  color: #000000;
+}
+
+.form-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  flex: 2;
+  height: 2.4rem;
+}
+
+.search-radio-group {
+  padding: 0 1.6rem;
+  flex: 8;
+
+  span:first-child {
+    padding-right: 1.6rem;
+  }
+
+  .radio-label {
+    margin-left: 0.6rem;
+  }
+}
+
+.search-button {
+  flex: 2;
+}
