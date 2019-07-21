@@ -7,7 +7,7 @@ export default class BeerBanner extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      beerInfo: ''
+      beerInfo: {}
     };
     this.getAnotherBeer = this.getAnotherBeer.bind(this);
   }
@@ -42,9 +42,9 @@ export default class BeerBanner extends React.Component {
   render() {
     const { error, isLoaded, beerInfo } = this.state;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div className="error-message">Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>
+      return <div className="banner-loading">Loading...</div>
     } else {
       return (
         <div className="banner-container">
@@ -57,7 +57,7 @@ export default class BeerBanner extends React.Component {
               {beerInfo.description}
             </div>
             <div className="switch-beer">
-              <button className="button primary-btn" onClick={this.getAnotherBeer}>Another Beer</button>
+              <button className="button primary-btn button-alcoholic-beer" onClick={this.getAnotherBeer}>Another Beer</button>
               <button className="button primary-btn" onClick={this.getAnotherBeer}>Random Non-Alcoholic Beer</button>
             </div>
           </div>

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<div
+  className="beer-item-container"
+>
+  <div
+    className="flex-container"
+  >
+    <div
+      className="image-container beer-item"
+    >
+      <img
+        className="beer-image beer-item"
+        src="image/png"
+      />
+    </div>
+    <div
+      className="beer-information"
+    >
+      <h3
+        className="beer-item-name"
+      >
+        Beer 1
+      </h3>
+      <p
+        className="beer-item-desc"
+      >
+        Beer description
+      </p>
+    </div>
+  </div>
+</div>
+`;

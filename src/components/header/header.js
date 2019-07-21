@@ -5,8 +5,8 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <h2 className="app-logo">{this.props.title}</h2>
-        {this.props.subtitle && <p>{this.props.subtitle}</p>}
+        <h2 className="app-title">{this.props.title}</h2>
+        {this.props.subtitle && <p className="app-subtitle">{this.props.subtitle}</p>}
       </header>
     );
   }

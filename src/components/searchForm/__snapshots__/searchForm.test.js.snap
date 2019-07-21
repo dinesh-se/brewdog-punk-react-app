@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render search form correctly 1`] = `
+<div
+  className="search-container"
+>
+  <div
+    className="search-form"
+  >
+    <h3>
+      Search
+    </h3>
+    <form
+      className="form-search"
+      onSubmit={[Function]}
+    >
+      <input
+        className="search-input"
+        id="search_input"
+        placeholder="eg: lager"
+        type="text"
+      />
+      <div
+        className="search-radio-group"
+      >
+        <span>
+          <input
+            className="radio-button"
+            defaultChecked={true}
+            id="name"
+            name="search"
+            onChange={[Function]}
+            type="radio"
+            value="beer_name"
+          />
+          <label
+            className="radio-label"
+            htmlFor="name"
+          >
+            by name
+          </label>
+        </span>
+        <span>
+          <input
+            className="radio-button"
+            id="brew"
+            name="search"
+            onChange={[Function]}
+            type="radio"
+            value="brewed_before"
+          />
+          <label
+            className="radio-label"
+            htmlFor="brew"
+          >
+            by brewed before date
+          </label>
+        </span>
+      </div>
+      <button
+        className="button primary-btn search-button"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+  <SearchResults
+    beerList={Array []}
+  />
+</div>
+`;

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should display no results when no beers where found 1`] = `
+<p
+  className="no-results"
+>
+  No search results found.
+</p>
+`;
+
+exports[`should render list of beer correctly 1`] = `
+<div>
+  <h3>
+    Search Results
+  </h3>
+  <ul
+    className="beer-search-results"
+  >
+    <li
+      key="1"
+    >
+      <BeerItem
+        beer={
+          Object {
+            "description": "description 1",
+            "id": 1,
+            "image_url": "image1.png",
+            "name": "Beer 1",
+          }
+        }
+      />
+    </li>
+    <li
+      key="2"
+    >
+      <BeerItem
+        beer={
+          Object {
+            "description": "description 2",
+            "id": 2,
+            "image_url": "image2.png",
+            "name": "Beer 2",
+          }
+        }
+      />
+    </li>
+  </ul>
+</div>
+`;

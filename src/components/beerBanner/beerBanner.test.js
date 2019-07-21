@@ -1,0 +1,76 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import BeerBanner from './beerBanner';
+import "isomorphic-fetch";
+
+test('should render loader correctly', () => {
+  const wrapper = shallow(<BeerBanner />);
+
+  // default state - loading
+  wrapper.setState({
+    error: null,
+    isLoaded: false,
+    beerInfo: {}
+  });
+
+  expect(wrapper).toMatchSnapshot();
+  expect(wrapper.find('.banner-loading').text()).toBe('Loading...');
+  expect(wrapper.find('.error-message')).toHaveLength(0);
+  expect(wrapper.find('.banner-container')).toHaveLength(0);
+});
+
+test('should render error message correctly', () => {
+  const wrapper = shallow(<BeerBanner />);
+
+  // error state
+  wrapper.setState({
+    error: {
+      message: "Error fetching data."
+    },
+    isLoaded: true,
+    beerInfo: {}
+  });
+
+  expect(wrapper).toMatchSnapshot();
+  expect(wrapper.find('.error-message').text()).toContain('Error:');
+  expect(wrapper.find('.banner-loading')).toHaveLength(0);
+  expect(wrapper.find('.banner-container')).toHaveLength(0);
+});
+
+test('should render beer banner correctly', () => {
+  const wrapper = shallow(<BeerBanner />);
+
+  // success state
+  wrapper.setState({
+    error: null,
+    isLoaded: true,
+    beerInfo: {
+      name: 'Beer 1',
+      description: 'Beer description'
+    }
+  });
+
+  expect(wrapper).toMatchSnapshot();
+  expect(wrapper.find('.beer-name').text()).toContain('Beer 1');
+  expect(wrapper.find('.beer-desc').text()).toContain('Beer description');
+  expect(wrapper.find('.banner-loading')).toHaveLength(0);
+  expect(wrapper.find('.error-message')).toHaveLength(0);
+});
+
+test('should call another beer method on clicking button', () => {
+  const wrapper = shallow(<BeerBanner />);
+  wrapper.instance().getAnotherBeer = jest.fn();
+
+  // success state
+  wrapper.setState({
+    error: null,
+    isLoaded: true,
+    beerInfo: {
+      name: 'Beer 1',
+      description: 'Beer description'
+    }
+  });
+
+  wrapper.find('.button-alcoholic-beer').prop('onClick')();
+  expect(wrapper.instance().getAnotherBeer).toHaveBeenCalled();
+});
