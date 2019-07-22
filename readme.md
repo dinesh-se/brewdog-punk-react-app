@@ -1,6 +1,6 @@
 # BrewDog's beer application
 
-The application is deployed to Heroku. [Click to launch the application] (https://brew-dog-react-app.herokuapp.com/)
+The application is deployed to Heroku. [Click to launch the application](https://brew-dog-react-app.herokuapp.com/)
 
 After you clone or download the source code, run `yarn install`.
 
