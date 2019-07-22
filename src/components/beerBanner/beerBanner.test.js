@@ -74,3 +74,49 @@ test('should call another beer method on clicking button', () => {
   wrapper.find('.button-alcoholic-beer').prop('onClick')();
   expect(wrapper.instance().getAnotherBeer).toHaveBeenCalled();
 });
+
+test('should fetch random beer successfully', (done) => {
+  const wrapper = shallow(<BeerBanner />);
+  const mockSucessResponse = [{
+    name: 'Beer',
+    description: 'Beer description',
+    image_url: 'image.png'
+  }];
+  const mockJsonPromise = Promise.resolve(mockSucessResponse);
+
+  wrapper.instance().fetchRandomBeer = jest.fn(() => mockJsonPromise);
+  wrapper.instance().getAnotherBeer();
+
+  expect(wrapper.instance().fetchRandomBeer).toHaveBeenCalled();
+  wrapper.instance().fetchRandomBeer()
+    .then(() => {
+      expect(wrapper.state()).toEqual({
+        isLoaded: true,
+        beerInfo: mockSucessResponse[0],
+        error: null
+      });
+      done();
+    });
+});
+
+test('should set error message when API fails', (done) => {
+  const wrapper = shallow(<BeerBanner />);
+  const mockFailureResponse = {
+    message: "Error"
+  };
+  const mockJsonPromise = Promise.reject(mockFailureResponse);
+
+  wrapper.instance().fetchRandomBeer = jest.fn(() => mockJsonPromise);
+  wrapper.instance().getAnotherBeer();
+
+  expect(wrapper.instance().fetchRandomBeer).toHaveBeenCalled();
+  wrapper.instance().fetchRandomBeer()
+    .catch(() => {
+      expect(wrapper.state()).toEqual({
+        isLoaded: true,
+        beerInfo: {},
+        error: mockFailureResponse
+      });
+      done();
+    });
+});

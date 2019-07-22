@@ -26,7 +26,6 @@ export default class SearchForm extends React.Component {
           beerList: response,
           isLoaded: true
         }));
-        console.log('beer list', this.state);
       }, (error) => {
         this.setState(() => ({
           error,
@@ -54,7 +53,6 @@ export default class SearchForm extends React.Component {
     // I feel string formatting easier that working on Date objects in this case
     // If any third party library like moment.js was utilized, I would prefer working on Date objects
     const splitDate = date.split('-');
-    console.log(`${splitDate[1]}-${splitDate[0]}`);
     return `${splitDate[1]}-${splitDate[0]}`;
   }
 
