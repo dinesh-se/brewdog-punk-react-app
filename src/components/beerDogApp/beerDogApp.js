@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header/Header';
+import Header from '../header/header';
 import BeerBanner from '../beerBanner/beerBanner';
 import SearchForm from '../searchForm/searchForm';
 import './beerDogApp.scss';
